@@ -5,28 +5,23 @@
  */
 
 var app = require('../app');
-var debug = require('debug')('vss:server');
+var debug = require('debug')('node_project:server');
 var https = require('https');
 var fs = require('fs');
-
-var options = {
-    key: fs.readFileSync('./cert/server.key'),
-    cert: fs.readFileSync('./cert/server.crt')
-};
 
 /**
  * Get port from environment and store in Express.
  */
 
-var port = normalizePort(process.env.PORT || '3000');
+var port = normalizePort(process.env.PORT || '35000');
 app.set('port', port);
 
 /**
  * Create https server.
  */
 
-var server = https.createServer(options, app).listen(port, function(){
-  console.log("Https server listening on port " + port);
+var server = app.listen(port, function(){
+  console.log("Express server has started on port "+port)
 });
 
 /**
