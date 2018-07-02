@@ -1,9 +1,30 @@
-<%include ./common/header.ejs%>
+<%include ../common/header.ejs%>
 <style>
 .row{
     margin-bottom: 10px;
 }
 </style>
+<!-- USE VUE.JS -->
+<div class="container-fluid" id="main" v-cloak>
+    <H1>Hello, Welcome to <span v-text="name"></span> World!</H1>
+
+    <div class="container-fluid">
+        <div id="game">
+            <div class="row">
+                <h2>숫자 맞추기</h2>
+            </div>
+            <div class="row">
+                <span v-once v-if="value > cor">보다 작네</span>
+                <span v-else-if="value == cor">정답이네</span>
+                <span v-else="value < cor">보다 크네</span>
+            </div>
+            <div class="row">
+                <input class="col-lg-3 col-md-5 col-sm-7" type="text" v-model="value"/>
+                <button id="reset" class="btn btn-sm btn-primary">리셋</button>
+            </div>
+        </div>
+    </div>
+</div>
 <div class="container-fluid">
     <div class="card">
         <div class="card-header">
@@ -54,4 +75,5 @@
         </div>
     </div>
 </div>
-<%include ./common/footer.ejs%>
+<%include ../common/footer.ejs%>
+<script src="/js/main.js"></script>
