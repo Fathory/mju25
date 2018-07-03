@@ -1,0 +1,142 @@
+<%include ../common/header.ejs%>
+  <style>
+    ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background-color: #333;
+    }
+
+    li {
+      float: left;
+    }
+
+    li a {
+      display: block;
+      color: white;
+      text-align: center;
+      padding: 14px 16px;
+      text-decoration: none;
+    }
+
+    li a:hover {
+      background-color: #111;
+    }
+
+    #followers img {
+      width: inherit;
+    }
+  </style>
+  <ul>
+    <li>
+      <a class="active" href="#home">Home</a>
+    </li>
+    <li>
+      <a href="#news">News</a>
+    </li>
+    <li>
+      <a href="#contact">Contact</a>
+    </li>
+    <li>
+      <a href="#about">About</a>
+    </li>
+  </ul>
+
+  <div class="row">
+    <div class="col-4">
+      <div class="card">
+        <div class="card-header">
+          <span>Social Media Followers</span>
+        </div>
+        <div class="card-body">
+          <div class="row" id="followers" align="center">
+            <div class="col-4">
+              <img v-bind:src="fb_icon">
+              <H2> 4,295 </H2>
+            </div>
+            <div class="col-4">
+              <img v-bind:src="insta_icon">
+              <H2> 4,295 </H2>
+            </div>
+            <div class="col-4">
+              <img v-bind:src="twit_icon">
+              <H2> 4,295 </H2>
+            </div>
+          </div>
+          <div class="row"></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header">
+          <span>YouTube Subscribers(Last 30 Days)</span>
+        </div>
+        <div class="card-body">
+          echart
+          <div class="row" id="followers" align="center">
+          </div>
+          <div class="row"></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header">
+          <span>LinkedIn Key Metrics(Last 30 Days)</span>
+        </div>
+        <div class="card-body">
+          echart
+          <div class="row" id="" align="center">
+          </div>
+          <div class="row"></div>
+        </div>
+      </div>
+    </div>
+    <div class="col-6">
+      <div class="card" id="engaged">
+        <div class="card-header">
+          Facebook Engaged Users and Page Impressions
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-9">
+              <span class="form-control"></span>
+              <span class="form-control">{{ selected }}</span>
+            </div>
+            <div class="col-3">
+              <select v-model="selected" class="form-group">
+                <option value="all">All</option>
+                <option v-for="days in options" v-bind:value="days.NOdays">{{ days.days }}</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header">
+          Facebook Page Likes
+        </div>
+        <div class="card-body">
+
+        </div>
+      </div>
+    </div>
+    <div class="col-2">
+      <div class="card">
+        <div class="card-header">
+          Facebook Engaged Users and Page Impressions
+        </div>
+        <div class="card-body">
+
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header">
+          Facebook Engaged Users and Page Impressions
+        </div>
+        <div class="card-body">
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <%include ../common/footer.ejs%>
+    <script src="/js/dashboard.js"></script>

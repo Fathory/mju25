@@ -13,13 +13,13 @@ app.set('view engine', 'ejs');
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-console.log(__dirname);
-
 app.use('/js', [
     express.static(__dirname + '/views/common/js'),
     express.static(__dirname + '/views/main/js')
   ]
   );
+
+app.use('/img', express.static(__dirname + '/public/img'));
 app.use('/', index);
 
 module.exports = app;
