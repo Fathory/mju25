@@ -2,6 +2,8 @@ $(function(){
   getSize();
   FollowersChart();
   Likes_chart();
+  sample_chart();
+  sample_chart2();
 })
 
 function getSize(){
@@ -11,6 +13,12 @@ function getSize(){
   var likes_width = $("#likes").width();
   likes_width = likes_width * 0.5;
   $("#likes").height(likes_width);
+  var sample_width = $("#sample").width();
+  sample_width = sample_width;
+  $("#sample").height(sample_width);
+  var sample2_width = $("#sample2").width();
+  sample2_width = sample2_width*0.5;
+  $("#sample2").height(sample2_width);
 }
 var followers = new Vue({
   el: "#followers",
@@ -287,4 +295,95 @@ function Likes_chart() {
     }]
   };
   likes_chart.setOption(option);
+}
+
+
+function sample_chart() {
+  var sample_chart = echarts.init(document.getElementById('sample'));
+
+  function createNodes(count) {
+      var nodes = [];
+      for (var i = 0; i < count; i++) {
+          nodes.push({
+              id: i
+          });
+      }
+      return nodes;
+  }
+
+  function createEdges(count) {
+      var edges = [];
+      if (count === 2) {
+          return [[0, 1]];
+      }
+      for (var i = 0; i < count; i++) {
+          edges.push([i, (i + 1) % count]);
+      }
+      return edges;
+  }
+
+  var datas = [];
+  for (var i = 0; i < 16; i++) {
+      datas.push({
+          nodes: createNodes(i + 2),
+          edges: createEdges(i + 2)
+      });
+  }
+
+  option = {
+      series: datas.map(function (item, idx) {
+          return {
+              type: 'graph',
+              layout: 'force',
+              animation: false,
+              data: item.nodes,
+              left: (idx % 4) * 25 + '%',
+              top: Math.floor(idx / 4) * 25 + '%',
+              width: '25%',
+              height: '25%',
+              force: {
+                  // initLayout: 'circular'
+                  // gravity: 0
+                  repulsion: 60,
+                  edgeLength: 2
+              },
+              edges: item.edges.map(function (e) {
+                  return {
+                      source: e[0],
+                      target: e[1]
+                  };
+              })
+          };
+      })
+  };
+
+  sample_chart.setOption(option)
+}
+
+function sample_chart2(){
+  var sample_chart2 = echarts.init(document.getElementById('sample2'));
+  option = {
+    tooltip : {
+        formatter: "{a} <br/>{b} : {c}%"
+    },
+    toolbox: {
+        feature: {
+            restore: {},
+            saveAsImage: {}
+        }
+    },
+    series: [
+        {
+            name: '业务指标',
+            type: 'gauge',
+            detail: {formatter:'{value}%'},
+            data: [{value: 50, name: '完成率'}]
+        }
+    ]
+  };
+
+  setInterval(function () {
+    option.series[0].data[0].value = (Math.random() * 100).toFixed(2) - 0;
+    sample_chart2.setOption(option, true);
+  },2000);
 }
